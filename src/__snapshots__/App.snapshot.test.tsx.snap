@@ -2,10 +2,23 @@
 
 exports[`App renders learn react link 1`] = `
 <div>
-  <h1
-    className="MuiTypography-root MuiTypography-h1 css-o2w69a-MuiTypography-root"
-  >
-    First Todo
+  <h1>
+    Header
   </h1>
+  <div>
+    <div>
+      <h1
+        className="MuiTypography-root MuiTypography-h1 css-o2w69a-MuiTypography-root"
+      >
+        First Todo
+      </h1>
+      <a
+        href="/todo-2"
+        onClick={[Function]}
+      >
+        Go to todo 2
+      </a>
+    </div>
+  </div>
 </div>
 `;
