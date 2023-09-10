@@ -1,48 +1,47 @@
-import { useEffect, useState } from "react";
-import API from "../../API/API";
-import { Container, Typography } from "@mui/material";
-import { promiseWrapper } from "../../API/helper";
+import { FlightStatus, useGetFlightsList } from "../../API/API";
+import {
+  Container,
+  Paper,
+  styled,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { formatDateTime } from "../../util";
 
-interface FlightStatus {
-  id: Number;
-  flightNumber: string;
-  airline: string;
-  origin: string;
-  destination: string;
-  departureTime: string;
-  status: string;
-}
-
-function useGetFlightsList() {
-  const [resource, setResource] = useState({ status: "pending" });
-
-  useEffect(() => {
-    const getData = async () => {
-      const promise = API.fetchFlights();
-      setResource(promiseWrapper(promise));
-    };
-
-    getData();
-  }, []);
-
-  return resource;
-}
+const StyledTable = styled(Table)({});
 
 export function FlightsListTable() {
   let flightsList = useGetFlightsList();
 
   return (
-    <Typography variant={"h6"}>
-      {flightsList.data?.map((flight: FlightStatus) => (
-        <Container>
-          <Typography>{flight.flightNumber}</Typography>
-          <Typography>{flight.airline}</Typography>
-          <Typography>{flight.origin}</Typography>
-          <Typography>{flight.destination}</Typography>
-          <Typography>{flight.departureTime}</Typography>
-          <Typography>{flight.status}</Typography>
-        </Container>
-      ))}
-    </Typography>
+    <Container>
+      <StyledTable component={Paper}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Flight Number</TableCell>
+            <TableCell>Airline</TableCell>
+            <TableCell>From</TableCell>
+            <TableCell>To</TableCell>
+            <TableCell>Departure Time</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {flightsList.data?.map((flight: FlightStatus) => (
+            <TableRow key={flight.id} hover>
+              <TableCell>{flight.flightNumber}</TableCell>
+              <TableCell>{flight.airline}</TableCell>
+              <TableCell>{flight.origin}</TableCell>
+              <TableCell>{flight.destination}</TableCell>
+              <TableCell>{formatDateTime(flight.departureTime)}</TableCell>
+              <TableCell>{flight.status}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </StyledTable>
+    </Container>
   );
 }
