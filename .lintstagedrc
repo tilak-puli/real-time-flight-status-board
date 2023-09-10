@@ -3,6 +3,6 @@
   "*.tsx": ["prettier --check", "eslint"],
   "*.js": ["prettier --check", "eslint"],
   "*.jsx": ["prettier --check", "eslint"],
-  "*.html": ["eslint", "prettier --check"],
+  "*.html": ["prettier --check"],
   "*.scss": "prettier --check"
 }
