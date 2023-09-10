@@ -1,18 +1,20 @@
 // App.jsx
 import "./App.css";
-import React from "react";
-import { useState } from "react";
+
+// Fonts for Material UI components
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import theme from "./style/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import Todo from "./screens/todo";
 
 function App() {
-  const [todos] = useState([{ id: 1, title: "First Todo" }]);
   return (
-    <>
-      {todos.map((todo) => (
-        <div key={todo.id}>
-          <h1>{todo.title}</h1>
-        </div>
-      ))}
-    </>
+    <ThemeProvider theme={theme}>
+      <Todo />
+    </ThemeProvider>
   );
 }
 

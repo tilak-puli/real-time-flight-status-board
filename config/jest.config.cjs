@@ -19,11 +19,12 @@ module.exports = {
     ],
   ],
   collectCoverageFrom: [
+    '!*.d.ts',
     "src/**/*.{js,ts,jsx,tsx}",
     "!src/main.tsx",
     "!src/vite-env.d.ts",
   ],
-  coverageReporters: ["json", "lcov", "text", "clover", "cobertura"],
+  coverageReporters: ["text"],
 
   coverageThreshold: {
     global: {
