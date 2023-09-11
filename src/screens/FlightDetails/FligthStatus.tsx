@@ -1,7 +1,7 @@
 import { styled, Typography } from "@mui/material";
 import { green, grey, orange, red } from "@mui/material/colors";
 
-const StatusColor = {
+export const StatusColor = {
   "On Time": green["700"],
   Delayed: orange["700"],
   Boarding: orange["700"],

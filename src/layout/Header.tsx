@@ -1,12 +1,15 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Flight Status Board
-        </Typography>
+      <Toolbar sx={{ justifyContent: "center" }}>
+        <Link to={"/"}>
+          <Typography variant="h6" component="div" sx={{ color: "white" }}>
+            Flight Status Board
+          </Typography>
+        </Link>
       </Toolbar>
     </AppBar>
   );

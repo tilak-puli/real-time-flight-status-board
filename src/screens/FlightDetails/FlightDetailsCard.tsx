@@ -1,5 +1,5 @@
 import { FlightStatus, useGetFlightDetails } from "../../API/API";
-import { FligthStatus } from "./FligthStatus";
+import { FligthStatus, StatusColor } from "./FligthStatus";
 import { formatDate, formatTime } from "../../util";
 import {
   Card,
@@ -31,7 +31,12 @@ export function FlightDetailsCard({ id }) {
           </JourneyContainer>
           <Container>
             <Typography>{formatDate(flightDetails.departureTime)}</Typography>
-            <Typography variant={"h6"}>
+            <Typography
+              sx={{
+                fontSize: 25,
+                color: StatusColor[flightDetails.status] || "black",
+              }}
+            >
               {formatTime(flightDetails.departureTime)}
             </Typography>
           </Container>
@@ -47,7 +52,7 @@ const CardContainer = styled(Container)({
 const StyledCardContent = styled(CardContent)({
   display: "flex",
   flexDirection: "column",
-  gap: "1em",
+  gap: "2em",
 });
 const CardTitleContainer = styled(Container)({
   display: "flex",
