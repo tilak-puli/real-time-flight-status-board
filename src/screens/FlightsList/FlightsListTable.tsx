@@ -1,5 +1,5 @@
 import { useGetFlightsList } from "../../API/API";
-import { Container, Paper, Typography } from "@mui/material";
+import { Container, Paper, TextField, Typography } from "@mui/material";
 import { formatDateTime, timeDiffFromNow } from "../../util";
 import { useNavigate } from "react-router-dom";
 import { FlightStatus } from "../FlightDetails/FlightStatus";
@@ -9,6 +9,7 @@ import {
   GridRenderCellParams,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
+import React, { useState } from "react";
 
 const columns: GridColDef[] = [
   {
@@ -53,17 +54,36 @@ const columns: GridColDef[] = [
 export function FlightsListTable() {
   const navigate = useNavigate();
   let flightsList = useGetFlightsList();
+  const [searchText, setSearchText] = useState("");
 
   if (!flightsList.data) {
     return <div />;
   }
 
-  const rows = flightsList.data;
+  const rows = flightsList.data?.filter((row) =>
+    [row.flightNumber, row.origin, row.destination, row.airline].some((val) =>
+      val.includes(searchText),
+    ),
+  );
 
   return (
     <Container>
-      <Container sx={{ textAlign: "right" }}>
-        <Typography gutterBottom>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          pb: 1,
+        }}
+      >
+        <TextField
+          label="Search"
+          variant="standard"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setSearchText(event.target.value);
+          }}
+        />
+        <Typography>
           Last updated: {timeDiffFromNow(flightsList.updatedOn)}
         </Typography>
       </Container>

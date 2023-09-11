@@ -24,36 +24,43 @@ export function FlightDetailsCard({ id }: Props) {
   }
 
   return (
-    <CardContainer>
-      <Card>
-        <StyledCardContent>
-          <CardTitleContainer>
-            <Typography variant={"h6"}>
-              {flightDetails.airline} {flightDetails.flightNumber}
-            </Typography>
-            <FlightStatus status={flightDetails.status} />
-          </CardTitleContainer>
-          <JourneyContainer>
-            <Typography variant={"h5"}>{flightDetails.origin}</Typography>
-            <JourneyDivider>
-              <FlightTakeoffIcon fontSize={"large"} />
-            </JourneyDivider>
-            <Typography variant={"h5"}>{flightDetails.destination}</Typography>
-          </JourneyContainer>
-          <Container>
-            <Typography>{formatDate(flightDetails.departureTime)}</Typography>
-            <Typography
-              sx={{
-                fontSize: 25,
-                color: StatusColor[flightDetails.status] || "black",
-              }}
-            >
-              {formatTime(flightDetails.departureTime)}
-            </Typography>
-          </Container>
-        </StyledCardContent>
-      </Card>
-    </CardContainer>
+    <>
+      <Typography variant={"h5"} mb={2}>
+        Flight Details
+      </Typography>
+      <CardContainer>
+        <Card>
+          <StyledCardContent>
+            <CardTitleContainer>
+              <Typography variant={"h6"}>
+                {flightDetails.airline} {flightDetails.flightNumber}
+              </Typography>
+              <FlightStatus status={flightDetails.status} />
+            </CardTitleContainer>
+            <JourneyContainer>
+              <Typography variant={"h5"}>{flightDetails.origin}</Typography>
+              <JourneyDivider>
+                <FlightTakeoffIcon fontSize={"large"} />
+              </JourneyDivider>
+              <Typography variant={"h5"}>
+                {flightDetails.destination}
+              </Typography>
+            </JourneyContainer>
+            <Container>
+              <Typography>{formatDate(flightDetails.departureTime)}</Typography>
+              <Typography
+                sx={{
+                  fontSize: 25,
+                  color: StatusColor[flightDetails.status] || "black",
+                }}
+              >
+                {formatTime(flightDetails.departureTime)}
+              </Typography>
+            </Container>
+          </StyledCardContent>
+        </Card>
+      </CardContainer>
+    </>
   );
 }
 

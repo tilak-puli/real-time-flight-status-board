@@ -1,4 +1,4 @@
-import { Skeleton, Typography } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Body from "../../layout/Body";
 import ErrorBoundary from "../../components/ErrorBoundary";
@@ -24,9 +24,6 @@ function FlightDetails() {
 
   return (
     <Body>
-      <Typography variant={"h5"} mb={2}>
-        Flight Details
-      </Typography>
       <ErrorBoundary
         fallback={
           <ErrorCard
