@@ -1,4 +1,4 @@
-import { useGetFlightsList } from "../../API/API";
+import { FlightStatusDetails, useGetFlightsList } from "../../API/API";
 import { Container, Paper, TextField, Typography } from "@mui/material";
 import { formatDateTime, timeDiffFromNow } from "../../util";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +60,7 @@ export function FlightsListTable() {
     return <div />;
   }
 
-  const rows = flightsList.data?.filter((row) =>
+  const rows = flightsList.data?.filter((row: FlightStatusDetails) =>
     [row.flightNumber, row.origin, row.destination, row.airline].some((val) =>
       val.includes(searchText),
     ),
@@ -68,6 +68,9 @@ export function FlightsListTable() {
 
   return (
     <Container>
+      <Typography variant={"h5"} mb={2} sx={{ textAlign: "center" }}>
+        List of flights
+      </Typography>
       <Container
         sx={{
           display: "flex",

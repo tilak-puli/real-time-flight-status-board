@@ -1,10 +1,10 @@
-import { Skeleton } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Body from "../../layout/Body";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { Suspense } from "react";
 import { FlightDetailsCard } from "./FlightDetailsCard";
 import ErrorCard from "../../components/ErrorCard";
+import LoaderAnimation from "../../components/LoaderAnimation";
 
 function FlightDetails() {
   let { id } = useParams();
@@ -36,16 +36,7 @@ function FlightDetails() {
           />
         }
       >
-        <Suspense
-          fallback={
-            <Skeleton
-              variant="rectangular"
-              width={1100}
-              height={250}
-              animation={"wave"}
-            />
-          }
-        >
+        <Suspense fallback={<LoaderAnimation />}>
           <FlightDetailsCard id={+id as number} />
         </Suspense>
       </ErrorBoundary>
