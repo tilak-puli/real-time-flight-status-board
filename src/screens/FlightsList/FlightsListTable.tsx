@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { formatDateTime } from "../../util";
 import { useNavigate } from "react-router-dom";
+import { FligthStatus } from "../FlightDetails/FligthStatus";
 const StyledTable = styled(Table)({});
 
 export function FlightsListTable() {
@@ -42,7 +43,7 @@ export function FlightsListTable() {
               <TableCell>{flight.origin}</TableCell>
               <TableCell>{flight.destination}</TableCell>
               <TableCell>{formatDateTime(flight.departureTime)}</TableCell>
-              <TableCell>{flight.status}</TableCell>
+              <TableCell>{<FligthStatus status={flight.status} />}</TableCell>
             </TableRow>
           ))}
         </TableBody>

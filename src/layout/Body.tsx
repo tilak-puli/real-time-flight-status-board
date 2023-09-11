@@ -12,6 +12,8 @@ const BodyContainer = styled("div")({
   padding: 20,
   alignItems: "center",
   maxWidth: "100vw",
+  height: "100%",
+  flex: 1,
 });
 
 export default Body;

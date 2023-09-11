@@ -1,9 +1,9 @@
-import { Paper, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useGetFlightDetails } from "../../API/API";
 import Body from "../../layout/Body";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { Suspense } from "react";
+import { FlightDetailsCard } from "./FlightDetailsCard";
 
 function FlightDetails() {
   let { id } = useParams();
@@ -22,12 +22,6 @@ function FlightDetails() {
       </ErrorBoundary>
     </Body>
   );
-}
-
-function FlightDetailsCard({ id }) {
-  const response = useGetFlightDetails(id);
-
-  return <Paper>{response.data?.flightNumber}</Paper>;
 }
 
 export default FlightDetails;

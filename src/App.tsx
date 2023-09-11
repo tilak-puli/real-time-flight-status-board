@@ -17,7 +17,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={WithHeader(<FlightsList />)} />
-        <Route path="/flight-details/:id" element={<FlightDetails />} />
+        <Route
+          path="/flight-details/:id"
+          element={WithHeader(<FlightDetails />)}
+        />
       </Routes>
     </ThemeProvider>
   );
