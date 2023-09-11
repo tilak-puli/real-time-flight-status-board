@@ -1,8 +1,7 @@
-import { FlightStatus, useGetFlightsList } from "../../API/API";
+import { FlightStatusDetails, useGetFlightsList } from "../../API/API";
 import {
   Container,
   Paper,
-  styled,
   Table,
   TableBody,
   TableCell,
@@ -12,8 +11,7 @@ import {
 } from "@mui/material";
 import { formatDateTime, timeDiffFromNow } from "../../util";
 import { useNavigate } from "react-router-dom";
-import { FligthStatus } from "../FlightDetails/FligthStatus";
-const StyledTable = styled(Table)({});
+import { FlightStatus } from "../FlightDetails/FlightStatus";
 
 export function FlightsListTable() {
   const navigate = useNavigate();
@@ -26,7 +24,7 @@ export function FlightsListTable() {
           Last updated on: {timeDiffFromNow(flightsList.updatedOn)}
         </Typography>
       </Container>
-      <StyledTable component={Paper}>
+      <Table component={Paper}>
         <TableHead>
           <TableRow>
             <TableCell>Flight Number</TableCell>
@@ -38,8 +36,9 @@ export function FlightsListTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {flightsList.data?.map((flight: FlightStatus) => (
+          {flightsList.data?.map((flight: FlightStatusDetails) => (
             <TableRow
+              // @ts-ignore
               key={flight.id}
               hover
               onClick={() => navigate(`flight-details/${flight.id}`)}
@@ -49,11 +48,11 @@ export function FlightsListTable() {
               <TableCell>{flight.origin}</TableCell>
               <TableCell>{flight.destination}</TableCell>
               <TableCell>{formatDateTime(flight.departureTime)}</TableCell>
-              <TableCell>{<FligthStatus status={flight.status} />}</TableCell>
+              <TableCell>{<FlightStatus status={flight.status} />}</TableCell>
             </TableRow>
           ))}
         </TableBody>
-      </StyledTable>
+      </Table>
     </Container>
   );
 }

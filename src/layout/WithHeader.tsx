@@ -1,7 +1,8 @@
 import Header from "./Header";
 import { styled } from "@mui/material";
+import { ReactNode } from "react";
 
-const WithHeader = (element) => {
+const WithHeader = (element: ReactNode) => {
   return (
     <PageContainer>
       <Header />

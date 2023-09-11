@@ -8,6 +8,10 @@ import { FlightDetailsCard } from "./FlightDetailsCard";
 function FlightDetails() {
   let { id } = useParams();
 
+  if (id === undefined || !Number.isFinite(id)) {
+    return <Body>Invalid Id provided in the URL</Body>;
+  }
+
   return (
     <Body>
       <Typography variant={"h5"} mb={2}>
@@ -17,7 +21,7 @@ function FlightDetails() {
         fallback={<Typography>Failed loading flight details</Typography>}
       >
         <Suspense fallback={<Typography>Loading...</Typography>}>
-          <FlightDetailsCard id={id} />
+          <FlightDetailsCard id={+id as number} />
         </Suspense>
       </ErrorBoundary>
     </Body>

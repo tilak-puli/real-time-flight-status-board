@@ -1,5 +1,5 @@
-import { FlightStatus, useGetFlightDetails } from "../../API/API";
-import { FligthStatus, StatusColor } from "./FligthStatus";
+import { FlightStatusDetails, useGetFlightDetails } from "../../API/API";
+import { FlightStatus, StatusColor } from "./FlightStatus";
 import { formatDate, formatTime } from "../../util";
 import {
   Card,
@@ -10,9 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 
-export function FlightDetailsCard({ id }) {
+interface Props {
+  id: number;
+}
+
+export function FlightDetailsCard({ id }: Props) {
   const response = useGetFlightDetails(id);
-  const flightDetails = (response.data as FlightStatus) ?? null;
+  const flightDetails = (response.data as FlightStatusDetails) ?? null;
 
   if (!flightDetails) {
     return <div />;
@@ -26,7 +30,7 @@ export function FlightDetailsCard({ id }) {
             <Typography variant={"h6"}>
               {flightDetails.airline} {flightDetails.flightNumber}
             </Typography>
-            <FligthStatus status={flightDetails.status} />
+            <FlightStatus status={flightDetails.status} />
           </CardTitleContainer>
           <JourneyContainer>
             <Typography variant={"h5"}>{flightDetails.origin}</Typography>

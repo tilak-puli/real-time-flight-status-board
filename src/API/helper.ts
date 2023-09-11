@@ -1,6 +1,6 @@
-export const promiseWrapper = (promise) => {
+export function promiseWrapper<T>(promise: Promise<T>): () => T {
   let status = "pending";
-  let result;
+  let result: any;
 
   const s = promise.then(
     (value) => {
@@ -25,4 +25,4 @@ export const promiseWrapper = (promise) => {
         throw new Error("Unknown status");
     }
   };
-};
+}

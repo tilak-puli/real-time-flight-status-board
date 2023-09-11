@@ -1,6 +1,11 @@
 import { styled } from "@mui/material";
+import { ReactNode } from "react";
 
-function Body({ children }) {
+interface Props {
+  children: ReactNode;
+}
+
+function Body({ children }: Props) {
   return <BodyContainer>{children}</BodyContainer>;
 }
 

@@ -12,8 +12,6 @@ export const formatTime = (datetimeString: string) => {
   return moment(datetimeString).format("LT");
 };
 
-export const timeDiffFromNow = (datetimeString: string) => {
-  console.log(datetimeString);
-  console.log(moment(datetimeString).fromNow());
+export const timeDiffFromNow = (datetimeString: number) => {
   return moment(datetimeString).fromNow();
 };

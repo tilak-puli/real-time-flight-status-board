@@ -1,41 +1,55 @@
 import axiosInstance from "./axios";
 import { useEffect, useState } from "react";
 import { promiseWrapper } from "./helper";
+import { AxiosResponse } from "axios";
 
 const API = {
-  fetchFlights: async () => {
+  fetchFlights: async (): Promise<AxiosResponse<FlightStatusDetails[]>> => {
     return await axiosInstance.get("/flights");
   },
-  fetchFlightDetails: async (id: number) => {
+  fetchFlightDetails: async (
+    id: number,
+  ): Promise<AxiosResponse<FlightStatusDetails>> => {
     return await axiosInstance.get(`/flights/${id}`);
   },
 };
 
 export function createFetchDataHook(
-  apiCall,
+  apiCall: (...params: any) => Promise<any>,
   refreshTime = 5000,
-): (...params: any) => Response {
+): (...params: any) => {
+  lastTriedUpdateTime: string;
+  lastUpdateStatus: string;
+  updatedOn: number;
+  status: string;
+  data: any;
+} {
   return (...params) => {
     const [resource, setResource] = useState({
       status: "pending",
+      lastUpdateStatus: "",
+      lastTriedUpdateTime: "",
+      updatedOn: 0,
+      data: null,
     });
 
     useEffect(() => {
-      let intervalId;
+      let intervalId: any;
       const getData = async () => {
         const promise = apiCall(...params);
         setResource(promiseWrapper(promise));
       };
+
       getData();
 
       if (refreshTime) {
         intervalId = setInterval(async () => {
           apiCall()
-            .then((res) => {
+            .then((res: any) => {
               setResource({ ...res, updatedOn: Date.now() });
             })
             .catch(() => {
-              // noinspection TypeScriptValidateTypes
+              // @ts-ignore
               setResource((previousValue) => ({
                 ...previousValue,
                 lastUpdateStatus: "error",
@@ -57,12 +71,7 @@ export function createFetchDataHook(
 export const useGetFlightsList = createFetchDataHook(API.fetchFlights, 5000);
 export const useGetFlightDetails = createFetchDataHook(API.fetchFlightDetails);
 
-export interface Response {
-  data?: any;
-  status: string;
-}
-
-export interface FlightStatus {
+export interface FlightStatusDetails {
   id: Number;
   flightNumber: string;
   airline: string;
