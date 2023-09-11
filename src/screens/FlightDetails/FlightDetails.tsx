@@ -8,7 +8,7 @@ import { FlightDetailsCard } from "./FlightDetailsCard";
 function FlightDetails() {
   let { id } = useParams();
 
-  if (id === undefined || !Number.isFinite(id)) {
+  if (id === undefined || !Number.isFinite(+id)) {
     return <Body>Invalid Id provided in the URL</Body>;
   }
 
