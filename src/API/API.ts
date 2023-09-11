@@ -6,22 +6,30 @@ const API = {
   fetchFlights: async () => {
     return await axiosInstance.get("/flights");
   },
+  fetchFlightDetails: async (id: number) => {
+    return await axiosInstance.get(`/flights/${id}`);
+  },
 };
 
-export function useGetFlightsList() {
-  const [resource, setResource] = useState({ status: "pending" });
+export function createFetchDataHook(apiCall) {
+  return (...params) => {
+    const [resource, setResource] = useState({ status: "pending" });
 
-  useEffect(() => {
-    const getData = async () => {
-      const promise = API.fetchFlights();
-      setResource(promiseWrapper(promise));
-    };
+    useEffect(() => {
+      const getData = async () => {
+        const promise = apiCall(...params);
+        setResource(promiseWrapper(promise));
+      };
 
-    getData();
-  }, []);
+      getData();
+    }, []);
 
-  return resource;
+    return resource;
+  };
 }
+
+export const useGetFlightsList = createFetchDataHook(API.fetchFlights);
+export const useGetFlightDetails = createFetchDataHook(API.fetchFlightDetails);
 
 export interface FlightStatus {
   id: Number;

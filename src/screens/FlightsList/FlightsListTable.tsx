@@ -10,10 +10,11 @@ import {
   TableRow,
 } from "@mui/material";
 import { formatDateTime } from "../../util";
-
+import { useNavigate } from "react-router-dom";
 const StyledTable = styled(Table)({});
 
 export function FlightsListTable() {
+  const navigate = useNavigate();
   let flightsList = useGetFlightsList();
 
   return (
@@ -31,7 +32,11 @@ export function FlightsListTable() {
         </TableHead>
         <TableBody>
           {flightsList.data?.map((flight: FlightStatus) => (
-            <TableRow key={flight.id} hover>
+            <TableRow
+              key={flight.id}
+              hover
+              onClick={() => navigate(`flight-details/${flight.id}`)}
+            >
               <TableCell>{flight.flightNumber}</TableCell>
               <TableCell>{flight.airline}</TableCell>
               <TableCell>{flight.origin}</TableCell>
