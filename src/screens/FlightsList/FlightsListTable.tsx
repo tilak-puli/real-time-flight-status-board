@@ -8,8 +8,9 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
-import { formatDateTime } from "../../util";
+import { formatDateTime, timeDiffFromNow } from "../../util";
 import { useNavigate } from "react-router-dom";
 import { FligthStatus } from "../FlightDetails/FligthStatus";
 const StyledTable = styled(Table)({});
@@ -20,6 +21,11 @@ export function FlightsListTable() {
 
   return (
     <Container>
+      <Container sx={{ textAlign: "right" }}>
+        <Typography>
+          Last updated on: {timeDiffFromNow(flightsList.updatedOn)}
+        </Typography>
+      </Container>
       <StyledTable component={Paper}>
         <TableHead>
           <TableRow>

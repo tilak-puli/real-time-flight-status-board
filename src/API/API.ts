@@ -11,25 +11,56 @@ const API = {
   },
 };
 
-export function createFetchDataHook(apiCall) {
+export function createFetchDataHook(
+  apiCall,
+  refreshTime = 5000,
+): (...params: any) => Response {
   return (...params) => {
-    const [resource, setResource] = useState({ status: "pending" });
+    const [resource, setResource] = useState({
+      status: "pending",
+    });
 
     useEffect(() => {
+      let intervalId;
       const getData = async () => {
         const promise = apiCall(...params);
         setResource(promiseWrapper(promise));
       };
-
       getData();
+
+      if (refreshTime) {
+        intervalId = setInterval(async () => {
+          apiCall()
+            .then((res) => {
+              setResource({ ...res, updatedOn: Date.now() });
+            })
+            .catch(() => {
+              // noinspection TypeScriptValidateTypes
+              setResource((previousValue) => ({
+                ...previousValue,
+                lastUpdateStatus: "error",
+                lastTriedUpdateTime: Date.now(),
+              }));
+            });
+        }, refreshTime);
+      }
+
+      return () => {
+        clearInterval(intervalId);
+      };
     }, []);
 
     return resource;
   };
 }
 
-export const useGetFlightsList = createFetchDataHook(API.fetchFlights);
+export const useGetFlightsList = createFetchDataHook(API.fetchFlights, 5000);
 export const useGetFlightDetails = createFetchDataHook(API.fetchFlightDetails);
+
+export interface Response {
+  data?: any;
+  status: string;
+}
 
 export interface FlightStatus {
   id: Number;

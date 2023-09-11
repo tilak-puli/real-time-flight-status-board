@@ -12,7 +12,11 @@ import {
 
 export function FlightDetailsCard({ id }) {
   const response = useGetFlightDetails(id);
-  const flightDetails = (response.data as FlightStatus) ?? {};
+  const flightDetails = (response.data as FlightStatus) ?? null;
+
+  if (!flightDetails) {
+    return <div />;
+  }
 
   return (
     <CardContainer>

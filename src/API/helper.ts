@@ -18,7 +18,7 @@ export const promiseWrapper = (promise) => {
       case "pending":
         throw s;
       case "success":
-        return result;
+        return { ...result, updatedOn: Date.now() };
       case "error":
         throw result;
       default:
