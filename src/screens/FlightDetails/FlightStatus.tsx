@@ -25,4 +25,6 @@ const StyledTypography = styled(Typography)((props: { status: string }) => ({
   borderRadius: "2px",
   width: 80,
   textAlign: "center",
+  padding: 5,
+  fontSize: 17,
 }));

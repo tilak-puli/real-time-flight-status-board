@@ -1,17 +1,54 @@
-import { FlightStatusDetails, useGetFlightsList } from "../../API/API";
-import {
-  Container,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { useGetFlightsList } from "../../API/API";
+import { Container, Paper, Typography } from "@mui/material";
 import { formatDateTime, timeDiffFromNow } from "../../util";
 import { useNavigate } from "react-router-dom";
 import { FlightStatus } from "../FlightDetails/FlightStatus";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+} from "@mui/x-data-grid";
+
+const columns: GridColDef[] = [
+  {
+    field: "flightNumber",
+    headerName: "Flight Number",
+    width: 150,
+  },
+  {
+    field: "airline",
+    headerName: "Airline",
+    width: 200,
+  },
+  {
+    field: "origin",
+    headerName: "Origin",
+    width: 200,
+  },
+  {
+    field: "destination",
+    headerName: "Destination",
+    width: 200,
+  },
+  {
+    field: "departureTime",
+    headerName: "Departure Time",
+    width: 160,
+    valueGetter: (params: GridValueGetterParams) =>
+      formatDateTime(params.row.departureTime),
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 160,
+    renderCell: (params: GridRenderCellParams<String>) => (
+      <Container>
+        <FlightStatus status={params.value} />
+      </Container>
+    ),
+  },
+];
 
 export function FlightsListTable() {
   const navigate = useNavigate();
@@ -21,6 +58,8 @@ export function FlightsListTable() {
     return <div />;
   }
 
+  const rows = flightsList.data;
+
   return (
     <Container>
       <Container sx={{ textAlign: "right" }}>
@@ -28,35 +67,23 @@ export function FlightsListTable() {
           Last updated: {timeDiffFromNow(flightsList.updatedOn)}
         </Typography>
       </Container>
-      <Table component={Paper}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Flight Number</TableCell>
-            <TableCell>Airline</TableCell>
-            <TableCell>From</TableCell>
-            <TableCell>To</TableCell>
-            <TableCell>Departure Time</TableCell>
-            <TableCell>Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {flightsList.data?.map((flight: FlightStatusDetails) => (
-            <TableRow
-              // @ts-ignore
-              key={flight.id}
-              hover
-              onClick={() => navigate(`flight-details/${flight.id}`)}
-            >
-              <TableCell>{flight.flightNumber}</TableCell>
-              <TableCell>{flight.airline}</TableCell>
-              <TableCell>{flight.origin}</TableCell>
-              <TableCell>{flight.destination}</TableCell>
-              <TableCell>{formatDateTime(flight.departureTime)}</TableCell>
-              <TableCell>{<FlightStatus status={flight.status} />}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <Paper>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+              },
+            },
+          }}
+          onRowClick={(params) => {
+            navigate(`/flight-details/${+params.id}`);
+          }}
+          pageSizeOptions={[10]}
+        />
+      </Paper>
     </Container>
   );
 }

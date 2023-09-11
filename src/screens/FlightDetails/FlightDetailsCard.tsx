@@ -9,6 +9,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 
 interface Props {
   id: number;
@@ -34,7 +35,9 @@ export function FlightDetailsCard({ id }: Props) {
           </CardTitleContainer>
           <JourneyContainer>
             <Typography variant={"h5"}>{flightDetails.origin}</Typography>
-            <JourneyDivider />
+            <JourneyDivider>
+              <FlightTakeoffIcon fontSize={"large"} />
+            </JourneyDivider>
             <Typography variant={"h5"}>{flightDetails.destination}</Typography>
           </JourneyContainer>
           <Container>
@@ -74,5 +77,5 @@ const JourneyContainer = styled(Container)({
 });
 const JourneyDivider = styled(Divider)({
   flex: 1,
-  margin: 5,
+  margin: 15,
 });
