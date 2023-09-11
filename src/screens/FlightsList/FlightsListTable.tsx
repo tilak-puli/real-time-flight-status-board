@@ -17,11 +17,15 @@ export function FlightsListTable() {
   const navigate = useNavigate();
   let flightsList = useGetFlightsList();
 
+  if (!flightsList.data) {
+    return <div />;
+  }
+
   return (
     <Container>
       <Container sx={{ textAlign: "right" }}>
-        <Typography>
-          Last updated on: {timeDiffFromNow(flightsList.updatedOn)}
+        <Typography gutterBottom>
+          Last updated: {timeDiffFromNow(flightsList.updatedOn)}
         </Typography>
       </Container>
       <Table component={Paper}>

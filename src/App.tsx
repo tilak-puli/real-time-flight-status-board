@@ -12,6 +12,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import WithHeader from "./layout/WithHeader";
 import FlightsList from "./screens/FlightsList/FlightsList";
 import FlightDetails from "./screens/FlightDetails/FlightDetails";
+import PageNotFound from "./screens/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           path="/flight-details/:id"
           element={WithHeader(<FlightDetails />)}
         />
+        <Route path="*" element={WithHeader(<PageNotFound />)} />
       </Routes>
     </ThemeProvider>
   );
