@@ -35,7 +35,7 @@ const columns: GridColDef[] = [
   {
     field: "departureTime",
     headerName: "Departure Time",
-    width: 160,
+    width: 200,
     valueGetter: (params: GridValueGetterParams) =>
       formatDateTime(params.row.departureTime),
   },

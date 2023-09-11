@@ -1,37 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App renders learn react link 1`] = `
-<div>
-  <div
-    className="MuiBox-root css-i9gxme"
+exports[`App renders flight list by default 1`] = `
+<div
+  className="css-zf0iqh"
+>
+  <header
+    className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
   >
-    <header
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
+    <div
+      className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-ap1hwn-MuiToolbar-root"
     >
-      <div
-        className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+      <a
+        href="/"
+        onClick={[Function]}
       >
         <div
-          className="MuiTypography-root MuiTypography-h6 css-1juivf6-MuiTypography-root"
+          className="MuiTypography-root MuiTypography-h6 css-817iol-MuiTypography-root"
         >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-6z2nyb-MuiSvgIcon-root"
+            data-testid="AirlinesIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13 4 2 20h17l3-16h-9zm1.5 10c-1.38 0-2.5-1.12-2.5-2.5S13.12 9 14.5 9s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+            />
+          </svg>
           Flight Status Board
         </div>
-      </div>
-    </header>
-  </div>
-  <div>
-    <div
-      className="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
-    >
-      <h4
-        className="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
-      >
-        List of flights
-      </h4>
-      <h6
-        className="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
-      />
+      </a>
     </div>
+  </header>
+  <div
+    className="css-1r3ldka"
+  >
+    <div />
   </div>
 </div>
 `;
