@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prepare": "husky install",
-    "test": "jest --config config/jest.config.cjs --coverage",
+    "test": "jest --config config/jest.config.cjs --coverage --silent",
     "eslint:fix": "eslint -c .eslintrc.cjs --fix './**/*.{ts,tsx,js,jsx}'",
     "eslint:check": "eslint -c .eslintrc.cjs './**/*.{ts,tsx,js,jsx}'",
     "prettier:fix": "prettier --config ./.prettierrc.json --write './**/*.{ts,tsx,js,jsx}'",
