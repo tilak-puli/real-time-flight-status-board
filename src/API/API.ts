@@ -15,8 +15,10 @@ const API = {
 };
 
 export function createFetchDataHook(
+  // eslint-disable-next-line
   apiCall: (...params: any) => Promise<any>,
   refreshTime = 5000,
+  // eslint-disable-next-line
 ): (...params: any) => {
   lastTriedUpdateTime: string;
   lastUpdateStatus: string;
@@ -62,6 +64,7 @@ export function createFetchDataHook(
       return () => {
         clearInterval(intervalId);
       };
+      // eslint-disable-next-line
     }, []);
 
     return resource;

@@ -14,18 +14,21 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
 
-      - name: Setup Node 14
+      - name: Setup Node 16
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18'
+
+      - name: Run Linting and Formatting Locally
+        run: npm run eslint:check && npm run prettier:check
+
+      - name: Run Tests Locally
+        run: npm run test
 
       - name: Build
         run: |
           yarn install --frozen-lockfile
           npm run bundle
-
-      - name: Run Tests Locally
-        run: npm run test
 
       - name: Deploy to Staging
         id: deploy-vercel-staging
