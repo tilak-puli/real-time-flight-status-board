@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { FlightDetailsCard } from "./FlightDetailsCard";
 import ErrorCard from "../../components/ErrorCard";
 import LoaderAnimation from "../../components/LoaderAnimation";
+import { Strings } from "../../locales/English";
 
 function FlightDetails() {
   let { id } = useParams();
@@ -12,11 +13,9 @@ function FlightDetails() {
   if (id === undefined || !Number.isFinite(+id)) {
     return (
       <ErrorCard
-        title={"Whoops! Failed to get Flight Details"}
-        description={
-          "Something went wrong with the link. Please return to the home page to find the flight you wanted."
-        }
-        actionName={"Back to Home"}
+        title={Strings.FlightsDetailsPage.IdErrorBoundary.Title}
+        description={Strings.FlightsDetailsPage.IdErrorBoundary.Description}
+        actionName={Strings.FlightsDetailsPage.IdErrorBoundary.ActionsName}
         navigateOnActionTo={"/"}
       />
     );
@@ -27,11 +26,9 @@ function FlightDetails() {
       <ErrorBoundary
         fallback={
           <ErrorCard
-            title={"Whoops! Failed to get Flight Details"}
-            description={
-              "Something went wrong while fetching flight Details. Please try again by reloading or returning back to homepage."
-            }
-            actionName={"Back to Home"}
+            title={Strings.FlightsDetailsPage.ErrorBoundary.Title}
+            description={Strings.FlightsDetailsPage.ErrorBoundary.Description}
+            actionName={Strings.FlightsDetailsPage.ErrorBoundary.ActionsName}
             navigateOnActionTo={"/"}
           />
         }

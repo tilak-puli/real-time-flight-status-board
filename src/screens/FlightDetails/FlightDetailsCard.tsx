@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+import { Strings } from "../../locales/English";
 
 interface Props {
   id: number;
@@ -26,7 +27,7 @@ export function FlightDetailsCard({ id }: Props) {
   return (
     <>
       <Typography variant={"h5"} mb={2}>
-        Flight Details
+        {Strings.FlightsDetailsPage.Title}
       </Typography>
       <CardContainer>
         <Card>

@@ -2,6 +2,7 @@ import axiosInstance from "./axios";
 import { useEffect, useState } from "react";
 import { promiseWrapper } from "./helper";
 import { AxiosResponse } from "axios";
+import { FLIGHTS_LIST_REFRESH_TIME_IN_MS } from "../Constants";
 
 const API = {
   fetchFlights: async (): Promise<AxiosResponse<FlightStatusDetails[]>> => {
@@ -17,7 +18,7 @@ const API = {
 export function createFetchDataHook(
   // eslint-disable-next-line
   apiCall: (...params: any) => Promise<any>,
-  refreshTime = 5000,
+  refreshTime: number,
   // eslint-disable-next-line
 ): (...params: any) => {
   lastTriedUpdateTime: string;
@@ -46,7 +47,7 @@ export function createFetchDataHook(
 
       if (refreshTime) {
         intervalId = setInterval(async () => {
-          apiCall()
+          apiCall(...params)
             .then((res: any) => {
               setResource({ ...res, updatedOn: Date.now() });
             })
@@ -71,7 +72,10 @@ export function createFetchDataHook(
   };
 }
 
-export const useGetFlightsList = createFetchDataHook(API.fetchFlights, 5000);
+export const useGetFlightsList = createFetchDataHook(
+  API.fetchFlights,
+  FLIGHTS_LIST_REFRESH_TIME_IN_MS,
+);
 export const useGetFlightDetails = createFetchDataHook(API.fetchFlightDetails);
 
 export interface FlightStatusDetails {

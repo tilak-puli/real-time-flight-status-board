@@ -10,6 +10,7 @@ import {
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import React, { useState } from "react";
+import { Strings } from "../../locales/English";
 
 const columns: GridColDef[] = [
   {
@@ -69,7 +70,7 @@ export function FlightsListTable() {
   return (
     <Container>
       <Typography variant={"h5"} mb={2} sx={{ textAlign: "center" }}>
-        List of flights
+        {Strings.FlightsListPage.Title}
       </Typography>
       <Container
         sx={{

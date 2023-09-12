@@ -3,6 +3,7 @@ import Body from "../../layout/Body";
 import { grey } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import pageNotFoundImage from "../../assets/404.png";
+import { Strings } from "../../locales/English";
 
 function PageNotFound() {
   const navigate = useNavigate();
@@ -12,19 +13,19 @@ function PageNotFound() {
         <Container sx={{ display: "flex", alignItems: "center" }}>
           <Container sx={{ py: 2 }}>
             <Typography variant={"h3"} mb={2} sx={{ textAlign: "center" }}>
-              404
+              {Strings.PageNotFoundPage.Dialog.Title}
             </Typography>
             <Typography variant={"h6"} mb={2} color={grey["700"]}>
-              This is not the page you are looking for!
+              {Strings.PageNotFoundPage.Dialog.Description1}
             </Typography>
             <Typography color={grey["700"]}>
-              This link may be faulty or the page moved.
+              {Strings.PageNotFoundPage.Dialog.Description2}
             </Typography>
             <Typography mb={2} color={grey["700"]}>
-              Return to the main page to find the page you wanted.
+              {Strings.PageNotFoundPage.Dialog.Description3}
             </Typography>
             <Button variant={"contained"} onClick={() => navigate("/")}>
-              Back to Home
+              {Strings.PageNotFoundPage.Dialog.ActionName}
             </Button>
           </Container>
           <Container>
