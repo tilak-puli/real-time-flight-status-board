@@ -18,7 +18,7 @@ const API = {
 export function createFetchDataHook(
   // eslint-disable-next-line
   apiCall: (...params: any) => Promise<any>,
-  refreshTime: number,
+  refreshTime: number = 0,
   // eslint-disable-next-line
 ): (...params: any) => {
   lastTriedUpdateTime: string;
